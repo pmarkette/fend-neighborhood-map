@@ -15,6 +15,7 @@ $icon-font-path: '../fonts/';
 body {
   padding-top: 20px;
   padding-bottom: 20px;
+  background-color: black;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -27,7 +28,7 @@ body {
 
 /* Custom page header */
 .header {
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 0px solid #e5e5e5;
 
   /* Make the masthead heading the same height as the navigation */
   h3 {
@@ -67,9 +68,12 @@ body {
   }
 }
 
-#map {
-  min-height: 50em;
+#map, #map-container{
+  /*min-height: 50em;*/
+  height: 35em; 
 }
+
+
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
