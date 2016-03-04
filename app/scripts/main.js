@@ -71,13 +71,7 @@ function initMap() {
     center: {lat: 37.8067098, lng: -122.2807331},
     zoom: 13
   });
-    function toggleBounce() {
-    if (marker.getAnimation() !== null) {
-      marker.setAnimation(null);
-    } else {
-      marker.setAnimation(google.maps.Animation.BOUNCE);
-    }
-  }
+
   var len = beerList.length;
   for (var i = 0; i < len; i++) {
     var list = beerList[i];
@@ -90,14 +84,26 @@ function initMap() {
       title: list.name,
       map: map
     });
-    curMarker.addListener("click", toggleBounce);
+    var infowindow = new google.maps.InfoWindow({
+    content: "test"//contentString
+  });
+    curMarker.addListener("click", toggleBounce, addInfoWindow);
   }
   var myLatLng = {lat: 37.8070047, lng: -122.2718144};
   var marker = new google.maps.Marker({
     position: myLatLng,
     map: map
   });
-
+  function toggleBounce() {
+    if (marker.getAnimation() !== null) {
+      marker.setAnimation(null);
+    } else {
+      marker.setAnimation(google.maps.Animation.BOUNCE);
+    }
+  }
+  function addInfoWindow() {
+    infowindow.open(map, marker);
+  }
   marker.setMap(map);
 }
 
