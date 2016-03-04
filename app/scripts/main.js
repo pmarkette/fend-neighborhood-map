@@ -2,7 +2,7 @@
 /*global google*/
 
 var model = {
-  beer: [
+  beer: ko.observableArray([
     {
       name: "Linden Street Brewery",
       lat: 37.7994396,
@@ -53,7 +53,7 @@ var model = {
       lat: 37.776209,
       lng: -122.2303851
       }
-  ]
+  ])
 };
 
 var ViewModel = function(first, last) {
