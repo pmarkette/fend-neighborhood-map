@@ -1,8 +1,10 @@
 /*global ko*/
 /*global google*/
+function ViewModel() {
+  "use strict";
+  var self = this;
 
-var model = {
-  beer: ko.observableArray([
+  self.beer = ko.observableArray([
     {
       name: "Linden Street Brewery",
       lat: 37.7994396,
@@ -53,20 +55,10 @@ var model = {
       lat: 37.776209,
       lng: -122.2303851
       }
-  ])
-};
+  ]);
+}
 
-var ViewModel = function(first, last) {
-"use strict";
-    this.firstName = ko.observable(first);
-    this.lastName = ko.observable(last);
-    this.fullName = ko.computed(function() {
-        // Knockout tracks dependencies automatically. It knows that fullName depends on firstName and lastName, because these get called when evaluating fullName.
-        return this.firstName() + " " + this.lastName();
-    }, this);
-};
-
-ko.applyBindings(new ViewModel("Planet", "Earth")); // This makes Knockout get to work
+ko.applyBindings(new ViewModel()); // This makes Knockout get to work
 
 //Create the map and markers
 var map;

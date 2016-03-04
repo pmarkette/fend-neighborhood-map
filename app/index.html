@@ -32,10 +32,9 @@
         <div class='list col-md-2'> <!--Removed liveExample-->
           <table>
             <!-- Todo: Generate table body -->
-            <tbody data-bind="foreach: seats">
+            <tbody data-bind="foreach: beer">
               <tr>
-                <td><input data-bind="value: name" /></td>
-                <td><button data-bind="click: filterMarkers">Filter</button></td>
+                <td><span data-bind="text: name"> </span></td>
               </tr>
             </tbody>
           </table>
