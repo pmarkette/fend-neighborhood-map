@@ -36,7 +36,12 @@
     "rules": {
       "quotes": [
         2,
-        "single"
+        "double"
+      ],
+      "no-unused-vars": [
+        1, 
+        {"vars": "all", 
+        "args": "after-used"}
       ]
     }
   }
