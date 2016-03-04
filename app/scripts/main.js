@@ -46,7 +46,7 @@ function ViewModel() {
       lng: -122.2726781
     },
     {
-      name: "Independent Brewing Company",
+      name: "Independent Brewing Co.",
       lat: 37.796432,
       lng: -122.2734581
     },
@@ -60,27 +60,44 @@ function ViewModel() {
 
 ko.applyBindings(new ViewModel()); // This makes Knockout get to work
 
+var beerList = ko.toJS(new ViewModel());
+beerList = ko.toJS(new ViewModel()).beer;
+
 //Create the map and markers
 var map;
 function initMap() {
   "use strict";
   map = new google.maps.Map(document.getElementById("map"), {
-    center: {lat: 37.8070047, lng: -122.2718144},
-    zoom: 15
+    center: {lat: 37.8067098, lng: -122.2807331},
+    zoom: 13
   });
-  var myLatLng = {lat: 37.8070047, lng: -122.2718144};
-  var marker = new google.maps.Marker({
-    position: myLatLng,
-    map: map
-  });
-  function toggleBounce() {
+    function toggleBounce() {
     if (marker.getAnimation() !== null) {
       marker.setAnimation(null);
     } else {
       marker.setAnimation(google.maps.Animation.BOUNCE);
     }
   }
-  marker.addListener("click", toggleBounce);
+  var len = beerList.length;
+  for (var i = 0; i < len; i++) {
+    var list = beerList[i];
+    var lat = (list.lat);
+    var lng = (list.lng);
+    var curLatLng = {lat, lng};
+    var curMarker = new google.maps.Marker({
+      position: curLatLng,
+      animation: google.maps.Animation.DROP,
+      title: list.name,
+      map: map
+    });
+    curMarker.addListener("click", toggleBounce);
+  }
+  var myLatLng = {lat: 37.8070047, lng: -122.2718144};
+  var marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map
+  });
+
   marker.setMap(map);
 }
 
