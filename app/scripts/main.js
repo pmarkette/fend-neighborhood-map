@@ -1,10 +1,6 @@
 /*global ko*/
 /*global google*/
-function ViewModel() {
-  "use strict";
-  var self = this;
-
-  self.beer = ko.observableArray([
+var model = [
     {
       name: "Linden Street Brewery",
       lat: 37.7994396,
@@ -55,13 +51,14 @@ function ViewModel() {
       lat: 37.776209,
       lng: -122.2303851
       }
-  ]);
+  ];
+function ViewModel() {
+  "use strict";
+  var self = this;
+  self.beer = ko.observableArray(model);
 }
 
 ko.applyBindings(new ViewModel()); // This makes Knockout get to work
-
-var beerList = ko.toJS(new ViewModel());
-beerList = ko.toJS(new ViewModel()).beer;
 
 //Create the map and markers
 var map;
@@ -72,9 +69,9 @@ function initMap() {
     zoom: 13
   });
 
-  var len = beerList.length;
+  var len = model.length;
   for (var i = 0; i < len; i++) {
-    var list = beerList[i];
+    var list = model[i];
     var lat = (list.lat);
     var lng = (list.lng);
     var curLatLng = {lat, lng};
