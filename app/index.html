@@ -21,6 +21,7 @@
     <!-- build:js scripts/vendor/modernizr.js -->
     <script src="/bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
+    <link href='https://fonts.googleapis.com/css?family=Amaranth:400,700' rel='stylesheet' type='text/css'>
   </head>
   <body>
     <!--[if lt IE 10]>
@@ -30,14 +31,14 @@
     <div class="container-fluid">
       <div class="row">
         <div class='list col-md-2'> <!--Removed liveExample-->
-          <table>
-            <!-- Todo: Generate table body -->
-            <tbody data-bind="foreach: beer">
-              <tr>
-                <td><span data-bind="text: name"> </span></td>
-              </tr>
-            </tbody>
-          </table>
+          <input  />
+          <div class="list">
+            <ul data-bind="foreach: beer">
+              <li data-bind="click: $parent.selectListItem">
+                <p class="beerList" data-bind="text: name"></p>
+              </li>
+            </ul>
+          </div>
 
 
             <!-- <p>First name: <input data-bind='value: firstName' /></p> 

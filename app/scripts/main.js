@@ -56,8 +56,11 @@ function ViewModel() {
   "use strict";
   var self = this;
   self.beer = ko.observableArray(model);
+  self.selectListItem = function() {
+  var clickName = self.beer.name;
+    console.log(clickName);
+      };
 }
-
 ko.applyBindings(new ViewModel()); // This makes Knockout get to work
 
 //Create the map and markers
@@ -71,36 +74,33 @@ function initMap() {
 
   var len = model.length;
   for (var i = 0; i < len; i++) {
-    var list = model[i];
-    var lat = (list.lat);
-    var lng = (list.lng);
+    var curName = model[i].name;
+    var lat = model[i].lat;
+    var lng = model[i].lng;
     var curLatLng = {lat, lng};
     var curMarker = new google.maps.Marker({
       position: curLatLng,
       animation: google.maps.Animation.DROP,
-      title: list.name,
+      title: curName,
       map: map
     });
+    curMarker.setMap(map);
     var infowindow = new google.maps.InfoWindow({
-    content: "test"//contentString
-  });
-    curMarker.addListener("click", toggleBounce, addInfoWindow);
-  }
-  var myLatLng = {lat: 37.8070047, lng: -122.2718144};
-  var marker = new google.maps.Marker({
-    position: myLatLng,
-    map: map
-  });
+      content: curName//contentString
+    });
+    curMarker.addListener("click", toggleBounce);
+    curMarker.addListener("click", addInfoWindow);
+  } //end for
+
   function toggleBounce() {
-    if (marker.getAnimation() !== null) {
-      marker.setAnimation(null);
+    if (this.getAnimation() !== null) {
+      this.setAnimation(null);
     } else {
-      marker.setAnimation(google.maps.Animation.BOUNCE);
+      this.setAnimation(google.maps.Animation.BOUNCE);
     }
   }
   function addInfoWindow() {
-    infowindow.open(map, marker);
+    infowindow.open(map, this);
   }
-  marker.setMap(map);
 }
 

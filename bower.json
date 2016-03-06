@@ -4,7 +4,8 @@
   "dependencies": {
     "bootstrap-sass": "~3.3.5",
     "modernizr": "~2.8.1",
-    "knockout": "^3.4.0"
+    "knockout": "^3.4.0",
+    "font-awesome": "fontawesome#^4.5.0"
   },
   "overrides": {
     "bootstrap-sass": {
