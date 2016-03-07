@@ -72,25 +72,12 @@ body {
   left: 20px;
   z-index: 1; /* The z-index should be higher than Google Maps */
   width: 300px;
-  margin: 60px auto 0;
+  margin: auto auto 0;
   padding: 10px;
   background: black;
   height: auto;
   opacity: .8; /* Set the opacity for a slightly transparent Google Form */
   color: green;
-}
-
-.list {
-  /* position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 99;
-  width: 246px;
-  margin: 16px;
-  background-color: white;
-  opacity: .8;
-  padding: 0px;
-  overflow: scroll; */
 }
 
 .content {

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Neighborhood Map</title>
+    <title>Oakland Breweries and Beer Gardens</title>
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
@@ -31,6 +31,7 @@
     <div class="container-fluid map-canvas"></div>
       <div class="row-fluid">
         <div class = "span2 list-container">
+            <h2>Oakland Breweries <br>and Beer Gardens</h2>
             <input placeholder = "Search..." data-bind="value: filter, valueUpdate: 'afterkeydown'">
             <ul class = "nameplace" data-bind="foreach: filteredItems">
             <li><h3 class = "thename" data-bind ="text: name, click: $parent.selectBeer"></h3></li>

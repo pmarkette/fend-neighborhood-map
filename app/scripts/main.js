@@ -1,3 +1,5 @@
+/*eslint-env browser, jquery*/
+/*global ko, google*/
 var beers = [
   {name: "Linden Street Brewery", lat: 37.7994396, lng: -122.2882671},
   {name: "The Beer Shed", lat: 37.7995263, lng: -122.2898785},
@@ -12,15 +14,13 @@ var beers = [
 ];
 
 var Location = function(data){
-    this.name = ko.observable(data.name);
-    this.lat = ko.observable(data.lat);
-    this.lng = ko.observable(data.lng);
+  "use strict";
+  this.name = ko.observable(data.name);
+  this.lat = ko.observable(data.lat);
+  this.lng = ko.observable(data.lng);
 };
 
-function initialize(){
-   "use strict";
-    ko.applyBindings(new viewModel());
-}
+
 
 function loadScript() {
   "use strict";
@@ -28,7 +28,7 @@ function loadScript() {
   script.type = "text/javascript";
   script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyB82oaqh1VTxwsHD3XH5ZjFi5CFMBFQdvE" + "&callback=initialize";
   script.onerror = function(){
-    alert("Oops! Google maps could not be loaded, please try again later." );
+    console.log("Google maps could not be loaded" );
   };
 
   document.body.appendChild(script);
@@ -36,13 +36,13 @@ function loadScript() {
 
 
 
-var viewModel = function(){
+var ViewModel = function(){
+  "use strict";
   var self = this;
-
-  var selectedIcon = 'http://www.google.com/mapfiles/marker.png',
-        unselectedIcon = 'http://www.google.com/mapfiles/marker_green.png',
-        selectedColor = 'red',
-        unselectedColor = 'green';
+  var selectedIcon = "http://www.google.com/mapfiles/marker.png",
+        unselectedIcon = "http://www.google.com/mapfiles/marker_green.png",
+        selectedColor = "red",
+        unselectedColor = "green";
 
   self.beerList = ko.observableArray([]);
   var arrayOfMarkers = [];
@@ -61,9 +61,9 @@ var viewModel = function(){
         mapTypeControlOptions: {
         style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
         position: google.maps.ControlPosition.TOP_RIGHT
-    },
+    }
     };
-    var map = new google.maps.Map(document.getElementsByClassName('map-canvas')[0], mapOptions);
+    var map = new google.maps.Map(document.getElementsByClassName("map-canvas")[0], mapOptions);
 
     var i;
     for (i = 0; i < self.beerList().length; i++) {
@@ -106,8 +106,8 @@ var viewModel = function(){
 
   self.stringStartsWith = function (string, startsWith) {
         string = string || "";
-        if (startsWith.length > string.length)
-        return false;
+        if (startsWith.length > string.length){
+        return false; }
         return string.substring(0, startsWith.length) === startsWith;
     };
 
@@ -157,6 +157,11 @@ var viewModel = function(){
 
   self.drawMap();
 
-};  //viewModel
+};  //ViewModel
+
+function initialize(){
+   "use strict";
+    ko.applyBindings(new ViewModel());
+}
 
 window.onload = loadScript;

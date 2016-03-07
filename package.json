@@ -39,9 +39,15 @@
         "double"
       ],
       "no-unused-vars": [
-        1, 
-        {"vars": "all", 
+        1,
+        {"vars": "all",
         "args": "after-used"}
+      ],
+     "no-loop-func": [
+        1
+      ],
+           "no-shadow": [
+        1
       ]
     }
   }
