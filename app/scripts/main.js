@@ -56,9 +56,12 @@ var viewModel = function(){
 
   this.drawMap = function() {
     var mapOptions = {
-        zoom: 13,
-        center: new google.maps.LatLng(37.8067098, -122.2807331),
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+        zoom: 14,
+        center: new google.maps.LatLng(37.796432, -122.2734581),
+        mapTypeControlOptions: {
+        style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+        position: google.maps.ControlPosition.TOP_RIGHT
+    },
     };
     var map = new google.maps.Map(document.getElementsByClassName('map-canvas')[0], mapOptions);
 
