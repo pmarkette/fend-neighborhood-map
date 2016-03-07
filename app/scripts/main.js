@@ -57,8 +57,7 @@ function ViewModel() {
   var self = this;
   self.beer = ko.observableArray(model);
   self.selectListItem = function() {
-  var clickName = self.beer.name;
-    console.log(clickName);
+    console.log("test");
       };
 }
 ko.applyBindings(new ViewModel()); // This makes Knockout get to work

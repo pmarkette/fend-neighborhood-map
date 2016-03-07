@@ -35,7 +35,7 @@
           <div class="list">
             <ul data-bind="foreach: beer">
               <li data-bind="click: $parent.selectListItem">
-                <p class="beerList" data-bind="text: name"></p>
+                <p class="beerList" data-bind="text: $data.name"></p>
               </li>
             </ul>
           </div>
