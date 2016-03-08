@@ -35,20 +35,28 @@
     },
     "rules": {
       "quotes": [
-        2,
+        1,
         "double"
       ],
       "no-unused-vars": [
         1,
-        {"vars": "all",
-        "args": "after-used"}
+        {
+          "vars": "all",
+          "args": "after-used"
+        }
       ],
-     "no-loop-func": [
+      "camelcase": [
         1
       ],
-           "no-shadow": [
+      "no-loop-func": [
+        1
+      ],
+      "no-shadow": [
         1
       ]
     }
+  },
+  "dependencies": {
+    "yelp": "^1.0.1"
   }
 }

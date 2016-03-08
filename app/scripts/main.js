@@ -1,4 +1,4 @@
-/*eslint-env browser, jquery*/
+/*eslint-env browser, jquery, node*/
 /*global ko, google*/
 var beers = [
   {name: "Linden Street Brewery", lat: 37.7994396, lng: -122.2882671},
@@ -165,3 +165,40 @@ function initialize(){
 }
 
 window.onload = loadScript;
+
+// Request API access: http://www.yelp.com/developers/getting_started/api_access
+var Yelp = require('yelp');
+
+var yelp = new Yelp({
+  consumer_key: 'qFWyVzFIKPXKkGvIb9GguQ',
+  consumer_secret: 'mCB7OIoZbSBYBCSSiCRXNvLh_bQ',
+  token: 'Jh7AVi2oGw1oNuVo1qiZHg4iYv9lb2ba',
+  token_secret: '3DR3IHfnLAJ_M-t6kjUJOsl4cG4'
+});
+
+// See http://www.yelp.com/developers/documentation/v2/search_api
+yelp.search({ term: 'food', location: 'Montreal' })
+.then(function (data) {
+  "use strict";
+  console.log(data);
+})
+.catch(function (err){
+  "use strict";
+  console.error(err);
+});
+
+// See http://www.yelp.com/developers/documentation/v2/business
+yelp.business('yelp-san-francisco')
+  .then(console.log)
+  .catch(console.error);
+
+yelp.phoneSearch({ phone: '+15555555555' })
+  .then(console.log)
+  .catch(console.error);
+
+// A callback based API is also available:
+yelp.business('yelp-san-francisco', function(err, data) {
+  "use strict";
+  if (err){ return console.log("error"); }
+  console.log(data);
+});
