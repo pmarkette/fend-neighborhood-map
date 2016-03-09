@@ -1,16 +1,16 @@
 /*eslint-env browser, jquery, node*/
 /*global ko, google*/
 var beers = [
-  {name: "Linden Street Brewery", lat: 37.7994396, lng: -122.2882671},
-  {name: "The Beer Shed", lat: 37.7995263, lng: -122.2898785},
-  {name: "Diving Dog Brewhouse", lat: 37.8077394, lng: -122.2720127},
-  {name: "Beer Revolution", lat: 37.797173, lng: -122.2784187},
-  {name: "The Trappist", lat: 37.8005888, lng: -122.2763285},
-  {name: "Drake’s Dealership", lat: 37.8126375, lng: -122.2686281},
-  {name: "Lost & Found", lat: 37.8101617, lng: -122.271404},
-  {name: "Woods Bar & Brewery", lat: 37.807009, lng: -122.2726781},
-  {name: "Independent Brewing Co.", lat: 37.796432, lng: -122.2734581},
-  {name: "Ale Industries", lat: 37.776209, lng: -122.2303851}
+  {name: "Linden Street Brewery", lat: 37.7994396, lng: -122.2882671, phone: "+15102518898"},
+  {name: "Pacific Coast Brewing Co", lat: 37.801542, lng: -122.2764502, phone: "+15108362739"},
+  {name: "Diving Dog Brewhouse", lat: 37.8077394, lng: -122.2720127, phone: "+15103061914"},
+  {name: "Beer Revolution", lat: 37.797173, lng: -122.2784187, phone: "+15104522337"},
+  {name: "The Trappist", lat: 37.8005888, lng: -122.2763285, phone: "+15102388900"},
+  {name: "Drake’s Dealership", lat: 37.8126375, lng: -122.2686281, phone: "+15108336649"},
+  {name: "Lost & Found", lat: 37.8101617, lng: -122.271404, phone: "+15107632040"},
+  {name: "Woods Bar & Brewery", lat: 37.807009, lng: -122.2726781, phone: "+15107618617"},
+  {name: "Independent Brewing Co.", lat: 37.796432, lng: -122.2734581, phone: "+15106982337"},
+  {name: "Ale Industries", lat: 37.776209, lng: -122.2303851, phone: "+19254705280"}
 ];
 
 var Location = function(data){
@@ -18,6 +18,14 @@ var Location = function(data){
   this.name = ko.observable(data.name);
   this.lat = ko.observable(data.lat);
   this.lng = ko.observable(data.lng);
+  this.phone = ko.observable(data.phone);
+  this.stars = ko.observable("");
+  this.desc = ko.observable("");
+  this.address0 = ko.observable("");
+  this.address1 = ko.observable("");
+  this.address2 = ko.observable("");
+  this.address3 = ko.observable("");
+  this.display_phone = ko.observable("");
 };
 
 
@@ -44,14 +52,15 @@ var ViewModel = function(){
         selectedColor = "red",
         unselectedColor = "green";
 
+  //Create an array of all Locations
   self.beerList = ko.observableArray([]);
   var arrayOfMarkers = [];
 
   self.filter = ko.observable("");
   self.currentLocation = ko.observable("Oakland, CA");
 
-  beers.forEach(function(placeItem){
-    self.beerList.push(new Location(placeItem));
+  beers.forEach(function(beerItem){
+    self.beerList.push(new Location(beerItem));
   });
 
   this.drawMap = function() {
@@ -68,7 +77,16 @@ var ViewModel = function(){
     var i;
     for (i = 0; i < self.beerList().length; i++) {
 
-        var contentString = "<div id=\"content\">" + "<h3>" + self.beerList()[i].name() + "</h3>" + "</div>";
+        var contentString = "<div id=\"content\">" +
+          "<h2 class=\"infoName\">" + self.beerList()[i].name() + "</h2>" +
+          "<div>" + self.beerList()[i].stars() + "</div>" +
+          "<div>" + self.beerList()[i].desc() + "</div>" +
+          "<div>" + self.beerList()[i].address0() + "</div>" +
+          "<div>" + self.beerList()[i].address1() + "</div>" +
+          "<div>" + self.beerList()[i].address2() + "</div>" +
+          "<div>" + self.beerList()[i].address3() + "</div>" +
+          "<div>" + self.beerList()[i].display_phone() + "</div>" +
+          "</div>";
         var infowindow = new google.maps.InfoWindow({content: contentString});
 
         var currentLatLng = new google.maps.LatLng(self.beerList()[i].lat(), self.beerList()[i].lng());
@@ -92,7 +110,7 @@ var ViewModel = function(){
                 marker.setIcon(selectedIcon);
             };
         })(marker, contentString, infowindow));
-    }
+    } //end for loop
 
   };
 
