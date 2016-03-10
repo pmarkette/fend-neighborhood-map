@@ -19,30 +19,13 @@ var Location = function(data){
   this.lat = ko.observable(data.lat);
   this.lng = ko.observable(data.lng);
   this.phone = ko.observable(data.phone);
-<<<<<<< HEAD
-  this.stars = ko.observable();
-  this.address0 = ko.observable();
-  this.address1 = ko.observable();
-  this.address2 = ko.observable();
-  this.address3 = ko.observable();
-  this.display_phone = ko.observable();
-||||||| merged common ancestors
-  this.stars = ko.observable("");
-  this.desc = ko.observable("");
-  this.address0 = ko.observable("");
-  this.address1 = ko.observable("");
-  this.address2 = ko.observable("");
-  this.address3 = ko.observable("");
-  this.display_phone = ko.observable("");
-=======
   this.stars = ko.observable();
   this.desc = ko.observable();
   this.address0 = ko.observable();
   this.address1 = ko.observable();
   this.address2 = ko.observable();
   this.address3 = ko.observable();
-  this.displayPhone = ko.observable();
->>>>>>> yelp
+  this.display_phone = ko.observable();
 };
 
 
@@ -92,7 +75,8 @@ var ViewModel = function(){
     var map = new google.maps.Map(document.getElementsByClassName("map-canvas")[0], mapOptions);
 
     var i;
-    for (i = 0; i < self.beerList().length; i++) {
+    //for (i = 0; i < self.beerList().length; i++) {
+    ko.utils.arrayForEach(self.beerList(), function() {
         //Yelp OAuth Example with Javascript: https://gist.github.com/kennygfunk/c24c8a2ea71c9ce7f4fc
         var auth = {
         //
@@ -194,7 +178,7 @@ var ViewModel = function(){
           console.log(data.businesses[0].location.display_address[0]);
           console.log(data.businesses[0].location.display_address[2]);
           var ad0 =
-          self.beerList()[i].push(address0(data.businesses[0].location.display_address[0];
+          self.beerList()[i].push(address0(data.businesses[0].location.display_address[0]));
         }
       });
 
