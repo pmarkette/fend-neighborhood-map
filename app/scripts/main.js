@@ -19,12 +19,30 @@ var Location = function(data){
   this.lat = ko.observable(data.lat);
   this.lng = ko.observable(data.lng);
   this.phone = ko.observable(data.phone);
+<<<<<<< HEAD
   this.stars = ko.observable();
   this.address0 = ko.observable();
   this.address1 = ko.observable();
   this.address2 = ko.observable();
   this.address3 = ko.observable();
   this.display_phone = ko.observable();
+||||||| merged common ancestors
+  this.stars = ko.observable("");
+  this.desc = ko.observable("");
+  this.address0 = ko.observable("");
+  this.address1 = ko.observable("");
+  this.address2 = ko.observable("");
+  this.address3 = ko.observable("");
+  this.display_phone = ko.observable("");
+=======
+  this.stars = ko.observable();
+  this.desc = ko.observable();
+  this.address0 = ko.observable();
+  this.address1 = ko.observable();
+  this.address2 = ko.observable();
+  this.address3 = ko.observable();
+  this.displayPhone = ko.observable();
+>>>>>>> yelp
 };
 
 
@@ -75,6 +93,57 @@ var ViewModel = function(){
 
     var i;
     for (i = 0; i < self.beerList().length; i++) {
+        //Yelp OAuth Example with Javascript: https://gist.github.com/kennygfunk/c24c8a2ea71c9ce7f4fc
+        var auth = {
+        //
+        // Update with your auth tokens.
+        //
+        consumerKey: "qFWyVzFIKPXKkGvIb9GguQ",
+        consumerSecret: "mCB7OIoZbSBYBCSSiCRXNvLh_bQ",
+        accessToken: "W5N9KRmGnciuZenun9HOVsGY2UHy2sja",
+        // This example is a proof of concept, for how to use the Yelp v2 API with javascript.
+        // You wouldn't actually want to expose your access token secret like this in a real application.
+        accessTokenSecret: "ErBWeQIdAGrL9MlGE2m6nUxG2IM",
+        serviceProvider: {
+        signatureMethod: "HMAC-SHA1"
+        }
+      };
+      var phoneNum = self.beerList()[i].phone();
+      var accessor = {
+        consumerSecret: auth.consumerSecret,
+        tokenSecret: auth.accessTokenSecret
+      };
+      var parameters = [];
+      parameters.push(["phone", phoneNum]);
+      parameters.push(["callback", "cb"]);
+      parameters.push(["oauth_consumer_key", auth.consumerKey]);
+      parameters.push(["oauth_consumer_secret", auth.consumerSecret]);
+      parameters.push(["oauth_token", auth.accessToken]);
+      parameters.push(["oauth_signature_method", "HMAC-SHA1"]);
+      var message = {
+        "action": "http://api.yelp.com/v2/phone_search",
+        "method": "GET",
+        "parameters": parameters
+      };
+      OAuth.setTimestampAndNonce(message);
+      OAuth.SignatureMethod.sign(message, accessor);
+      var parameterMap = OAuth.getParameterMap(message.parameters);
+      parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature);
+      //console.log(parameterMap);
+      $.ajax({
+        "url": message.action,
+        "data": parameterMap,
+        "cache": true,
+        "dataType": "jsonp",
+        //'jsonpCallback' : 'cb',
+        "success": function(data, textStats, XMLHttpRequest) {
+          //console.log(data.businesses[0]);
+          console.log(data.businesses[0].name);
+          console.log(data.businesses[0].location.display_address[0]);
+          console.log(data.businesses[0].location.display_address[2]);
+          self.beerList()[i].displayPhone(data.display_phone);
+        }
+      });
 
         //Yelp OAuth Example with Javascript: https://gist.github.com/kennygfunk/c24c8a2ea71c9ce7f4fc
         var auth = {
@@ -136,7 +205,7 @@ var ViewModel = function(){
           "<div>" + self.beerList()[i].address1() + "</div>" +
           "<div>" + self.beerList()[i].address2() + "</div>" +
           "<div>" + self.beerList()[i].address3() + "</div>" +
-          "<div>" + self.beerList()[i].display_phone() + "</div>" +
+          "<div>" + self.beerList()[i].displayPhone() + "</div>" +
           "</div>";
         var infowindow = new google.maps.InfoWindow({content: contentString});
 
@@ -185,8 +254,8 @@ var ViewModel = function(){
       if (!filter) {
         return self.beerList();
       } else {
-          return ko.utils.arrayFilter(self.beerList(), function(Location) {
-              return self.stringStartsWith(Location.name().toLowerCase(), filter);
+          return ko.utils.arrayFilter(self.beerList(), function(BeerLoc) {
+              return self.stringStartsWith(BeerLoc.name().toLowerCase(), filter);
           });
       }
     }, self.beerList, arrayOfMarkers);
