@@ -51,6 +51,9 @@
       "no-loop-func": [
         0
       ],
+      "no-alert": [
+        0
+      ],
       "no-shadow": [
         1
       ]
