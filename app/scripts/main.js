@@ -1,5 +1,6 @@
 /*eslint-env browser, jquery, node*/
-/*global ko, google*/
+/*global ko, google, OAuth*/
+"use strict";
 var beers = [
   {name: "Linden Street Brewery", lat: 37.7994396, lng: -122.2882671, phone: "+15102518898"},
   {name: "Pacific Coast Brewing Co", lat: 37.801542, lng: -122.2764502, phone: "+15108362739"},
@@ -14,7 +15,6 @@ var beers = [
 ];
 
 var Location = function(data){
-  "use strict";
   this.name = ko.observable(data.name);
   this.lat = ko.observable(data.lat);
   this.lng = ko.observable(data.lng);
@@ -24,14 +24,12 @@ var Location = function(data){
   this.address0 = ko.observable();
   this.address1 = ko.observable();
   this.address2 = ko.observable();
-  this.address3 = ko.observable();
   this.displayPhone = ko.observable();
 };
 
 
 
 function loadScript() {
-  "use strict";
   var script = document.createElement("script");
   script.type = "text/javascript";
   script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyB82oaqh1VTxwsHD3XH5ZjFi5CFMBFQdvE" + "&callback=initialize";
@@ -45,7 +43,6 @@ function loadScript() {
 
 
 var ViewModel = function(){
-  "use strict";
   var self = this;
   var selectedIcon = "http://www.google.com/mapfiles/marker.png",
         unselectedIcon = "http://www.google.com/mapfiles/marker_green.png",
@@ -112,29 +109,32 @@ var ViewModel = function(){
       var parameterMap = OAuth.getParameterMap(message.parameters);
       parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature);
       //console.log(parameterMap);
-      $.ajax({
-        "url": message.action,
-        "data": parameterMap,
-        "cache": true,
-        "dataType": "jsonp",
-        //'jsonpCallback' : 'cb',
-        "success": function(data, textStats, XMLHttpRequest) {
-          //console.log(data.businesses[0]);
-          console.log(data.businesses[0].name);
-          console.log(data.businesses[0].location.display_address[0]);
-          console.log(data.businesses[0].location.display_address[2]);
-          self.beerList()[i].displayPhone(data.display_phone);
-        }
-      });
-
+      (function(i) {
+          $.ajax({
+            "url": message.action,
+            "data": parameterMap,
+            "cache": true,
+            "dataType": "jsonp",
+            //'jsonpCallback' : 'cb',
+            "success": function(data, textStats, XMLHttpRequest) {
+              self.beerList()[i].stars(data.businesses[0].rating_img_url);
+              console.log(self.beerList()[i].stars());
+              self.beerList()[i].desc(data.businesses[0].snippet_text);
+              self.beerList()[i].address0(data.businesses[0].location.display_address[0]);
+              self.beerList()[i].address1(data.businesses[0].location.display_address[1]);
+              self.beerList()[i].address2(data.businesses[0].location.display_address[2]);
+              self.beerList()[i].displayPhone(data.businesses[0].display_phone);
+              console.log(self.beerList()[i].address0());
+            }
+          });
+        })(i);
         var contentString = "<div id=\"content\">" +
           "<h2 class=\"infoName\">" + self.beerList()[i].name() + "</h2>" +
-          "<div>" + self.beerList()[i].stars() + "</div>" +
+          "<div><img src=\"" + self.beerList()[i].stars() + "\" /></div>" +
           "<div>" + self.beerList()[i].desc() + "</div>" +
           "<div>" + self.beerList()[i].address0() + "</div>" +
           "<div>" + self.beerList()[i].address1() + "</div>" +
           "<div>" + self.beerList()[i].address2() + "</div>" +
-          "<div>" + self.beerList()[i].address3() + "</div>" +
           "<div>" + self.beerList()[i].displayPhone() + "</div>" +
           "</div>";
         var infowindow = new google.maps.InfoWindow({content: contentString});
@@ -228,7 +228,6 @@ var ViewModel = function(){
 };  //ViewModel
 
 function initialize(){
-   "use strict";
     ko.applyBindings(new ViewModel());
 }
 
