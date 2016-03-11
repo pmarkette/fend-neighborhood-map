@@ -34,7 +34,7 @@ function loadScript() {
   script.type = "text/javascript";
   script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyB82oaqh1VTxwsHD3XH5ZjFi5CFMBFQdvE" + "&callback=initialize";
   script.onerror = function(){
-    console.log("Google maps could not be loaded" );
+    alert("Google maps could not be loaded" );
   };
 
   document.body.appendChild(script);
@@ -44,8 +44,8 @@ function loadScript() {
 
 var ViewModel = function(){
   var self = this;
-  var selectedIcon = "http://www.google.com/mapfiles/marker.png",
-        unselectedIcon = "http://www.google.com/mapfiles/marker_green.png",
+  var selectedIcon = "https://www.google.com/mapfiles/marker.png",
+        unselectedIcon = "https://www.google.com/mapfiles/marker_green.png",
         selectedColor = "red",
         unselectedColor = "green";
 
@@ -100,7 +100,7 @@ var ViewModel = function(){
       parameters.push(["oauth_token", auth.accessToken]);
       parameters.push(["oauth_signature_method", "HMAC-SHA1"]);
       var message = {
-        "action": "http://api.yelp.com/v2/phone_search",
+        "action": "https://api.yelp.com/v2/phone_search",
         "method": "GET",
         "parameters": parameters
       };
@@ -108,7 +108,8 @@ var ViewModel = function(){
       OAuth.SignatureMethod.sign(message, accessor);
       var parameterMap = OAuth.getParameterMap(message.parameters);
       parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature);
-      //console.log(parameterMap);
+
+      //closure to apply yelp data to the observable array
       (function(i) {
           $.ajax({
             "url": message.action,
@@ -127,7 +128,8 @@ var ViewModel = function(){
               console.log(self.beerList()[i].address0());
             }
           });
-        })(i);
+        })(i); //end closure
+
         var contentString = "<div id=\"content\">" +
           "<h2 class=\"infoName\">" + self.beerList()[i].name() + "</h2>" +
           "<div><img src=\"" + self.beerList()[i].stars() + "\" /></div>" +
