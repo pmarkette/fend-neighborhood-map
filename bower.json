@@ -5,7 +5,9 @@
     "bootstrap-sass": "~3.3.5",
     "modernizr": "~2.8.1",
     "knockout": "^3.4.0",
-    "font-awesome": "fontawesome#^4.5.0"
+    "font-awesome": "fontawesome#^4.5.0",
+    "OAuth": "http://oauth.googlecode.com/svn/code/javascript/oauth.js",
+    "sha1": "http://oauth.googlecode.com/svn/code/javascript/sha1.js"
   },
   "overrides": {
     "bootstrap-sass": {
