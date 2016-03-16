@@ -68,10 +68,10 @@ body {
 
 .list-container {
   position: absolute;
-  top: 50px;
-  left: 20px;
+  top: 1em;
+  left: 1em;
   z-index: 1; /* The z-index should be higher than Google Maps */
-  width: 300px;
+  width: 15em;
   margin: auto auto 0;
   padding: 10px;
   background: black;

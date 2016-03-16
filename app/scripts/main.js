@@ -2,16 +2,16 @@
 /*global ko, google, OAuth*/
 "use strict";
 var beers = [
-  {name: "Linden Street Brewery", lat: 37.7994396, lng: -122.2882671, phone: "+15102518898"},
-  {name: "Pacific Coast Brewing Co", lat: 37.801542, lng: -122.2764502, phone: "+15108362739"},
-  {name: "Diving Dog Brewhouse", lat: 37.8077394, lng: -122.2720127, phone: "+15103061914"},
-  {name: "Beer Revolution", lat: 37.797173, lng: -122.2784187, phone: "+15104522337"},
-  {name: "The Trappist", lat: 37.8005888, lng: -122.2763285, phone: "+15102388900"},
-  {name: "Drake’s Dealership", lat: 37.8126375, lng: -122.2686281, phone: "+15108336649"},
-  {name: "Lost & Found", lat: 37.8101617, lng: -122.271404, phone: "+15107632040"},
-  {name: "Woods Bar & Brewery", lat: 37.807009, lng: -122.2726781, phone: "+15107618617"},
-  {name: "Independent Brewing Co.", lat: 37.796432, lng: -122.2734581, phone: "+15106982337"},
-  {name: "Ale Industries", lat: 37.776209, lng: -122.2303851, phone: "+19254705280"}
+  {name: "Linden Street Brewery", lat: 37.7994985, lng: -122.2879045, phone: "+15102518898"},
+  {name: "Pacific Coast Brewing Co", lat: 37.8015344, lng: -122.2741712, phone: "+15108362739"},
+  {name: "Diving Dog Brewhouse", lat: 37.8076629, lng: -122.2696182, phone: "+15103061914"},
+  {name: "Beer Revolution", lat: 37.7971749, lng: -122.2762197, phone: "+15104522337"},
+  {name: "The Trappist", lat: 37.8005481, lng: -122.2741687, phone: "+15102388900"},
+  {name: "Drake’s Dealership", lat: 37.8125182, lng: -122.2661527, phone: "+15108336649"},
+  {name: "Lost & Found", lat: 37.8101575, lng: -122.2691598, phone: "+15107632040"},
+  {name: "Woods Bar & Brewery", lat: 37.8070162, lng: -122.2705888, phone: "+15107618617"},
+  {name: "Independent Brewing Co.", lat: 37.7964226, lng: -122.2712658, phone: "+15106982337"},
+  {name: "Ale Industries", lat: 37.7762289, lng: -122.2281795, phone: "+19254705280"}
 ];
 
 var Location = function(data){
@@ -119,16 +119,16 @@ var ViewModel = function(){
             //'jsonpCallback' : 'cb',
             "success": function(data, textStats, XMLHttpRequest) {
               self.beerList()[i].stars(data.businesses[0].rating_img_url);
-              console.log(self.beerList()[i].stars());
               self.beerList()[i].desc(data.businesses[0].snippet_text);
               self.beerList()[i].address0(data.businesses[0].location.display_address[0]);
               self.beerList()[i].address1(data.businesses[0].location.display_address[1]);
               self.beerList()[i].address2(data.businesses[0].location.display_address[2]);
               self.beerList()[i].displayPhone(data.businesses[0].display_phone);
-              console.log(self.beerList()[i].address0());
             }
           });
         })(i); //end closure
+
+        console.log(self.beerList()[i].name());
 
         var contentString = "<div id=\"content\">" +
           "<h2 class=\"infoName\">" + self.beerList()[i].name() + "</h2>" +
