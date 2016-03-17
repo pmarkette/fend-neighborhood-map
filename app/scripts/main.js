@@ -124,44 +124,42 @@ var ViewModel = function(){
               self.beerList()[i].address1(data.businesses[0].location.display_address[1]);
               self.beerList()[i].address2(data.businesses[0].location.display_address[2]);
               self.beerList()[i].displayPhone(data.businesses[0].display_phone);
+
+              var contentString = "<div id=\"content\">" +
+                "<h2 class=\"infoName\">" + self.beerList()[i].name() + "</h2>" +
+                "<div><img src=\"" + self.beerList()[i].stars() + "\" /></div>" +
+                "<div>" + self.beerList()[i].desc() + "</div>" +
+                "<div>" + self.beerList()[i].address0() + "</div>" +
+                "<div>" + self.beerList()[i].address1() + "</div>" +
+                "<div>" + self.beerList()[i].address2() + "</div>" +
+                "<div>" + self.beerList()[i].displayPhone() + "</div>" +
+                "</div>";
+              var infowindow = new google.maps.InfoWindow({content: contentString});
+
+              var currentLatLng = new google.maps.LatLng(self.beerList()[i].lat(), self.beerList()[i].lng());
+              var marker = new google.maps.Marker({
+                  position: currentLatLng,
+                  map: map,
+                  title: self.beerList()[i].name(),
+                  icon: unselectedIcon
+              });
+
+              arrayOfMarkers.push(marker);
+
+          google.maps.event.addListener(marker, "click", self.markerReset);
+          google.maps.event.addListener(infowindow, "closeclick", self.markerReset);
+
+          google.maps.event.addListener(marker, "click", (function(marker, contentString, infoWindow){
+                  return function(){
+                      infowindow.setContent(contentString);
+                      infowindow.open(map, this);
+                      self.currentLocation(this.title);
+                      marker.setIcon(selectedIcon);
+                  };
+              })(marker, contentString, infowindow));
             }
           });
         })(i); //end closure
-
-        console.log(self.beerList()[i].name());
-
-        var contentString = "<div id=\"content\">" +
-          "<h2 class=\"infoName\">" + self.beerList()[i].name() + "</h2>" +
-          "<div><img src=\"" + self.beerList()[i].stars() + "\" /></div>" +
-          "<div>" + self.beerList()[i].desc() + "</div>" +
-          "<div>" + self.beerList()[i].address0() + "</div>" +
-          "<div>" + self.beerList()[i].address1() + "</div>" +
-          "<div>" + self.beerList()[i].address2() + "</div>" +
-          "<div>" + self.beerList()[i].displayPhone() + "</div>" +
-          "</div>";
-        var infowindow = new google.maps.InfoWindow({content: contentString});
-
-        var currentLatLng = new google.maps.LatLng(self.beerList()[i].lat(), self.beerList()[i].lng());
-        var marker = new google.maps.Marker({
-            position: currentLatLng,
-            map: map,
-            title: self.beerList()[i].name(),
-            icon: unselectedIcon
-        });
-
-        arrayOfMarkers.push(marker);
-
-    google.maps.event.addListener(marker, "click", self.markerReset);
-    google.maps.event.addListener(infowindow, "closeclick", self.markerReset);
-
-    google.maps.event.addListener(marker, "click", (function(marker, contentString, infoWindow){
-            return function(){
-                infowindow.setContent(contentString);
-                infowindow.open(map, this);
-                self.currentLocation(this.title);
-                marker.setIcon(selectedIcon);
-            };
-        })(marker, contentString, infowindow));
     } //end for loop
 
   };
@@ -226,6 +224,7 @@ var ViewModel = function(){
     };
 
   self.drawMap();
+  console.log(self.beerList());
 
 };  //ViewModel
 
