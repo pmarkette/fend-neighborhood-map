@@ -9,3 +9,6 @@ Please click the link above and you will see a list of breweries and beer garden
 To run this project locally, after cloning run "npm install" and "bower install", then run "gulp serve".
 
 To play with the distribution verion of the project, running "gulp" by itself will bundle the project into the /dist folder. To run the distribution version locally, run "gulp serve:dist".
+
+Sources:
+[https://github.com/jonsuh/hamburgers](https://github.com/jonsuh/hamburgers)

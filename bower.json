@@ -6,8 +6,9 @@
     "modernizr": "~2.8.1",
     "knockout": "^3.4.0",
     "font-awesome": "fontawesome#^4.5.0",
-    "OAuth": "http://oauth.googlecode.com/svn/code/javascript/oauth.js",
-    "sha1": "http://oauth.googlecode.com/svn/code/javascript/sha1.js"
+    "OAuth": "^1.0.7",
+    "sha1": "http://oauth.googlecode.com/svn/code/javascript/sha1.js",
+    "css-hamburgers": "^0.3.0"
   },
   "overrides": {
     "bootstrap-sass": {

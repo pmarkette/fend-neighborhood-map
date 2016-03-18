@@ -2,6 +2,7 @@ $icon-font-path: '../fonts/';
 
 // bower:scss
 /* @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";*/
+@import "_hamburgers.scss";
 // endbower
 
 .browserupgrade {
@@ -30,8 +31,9 @@ body {
 .header {
   border-bottom: 0px solid #e5e5e5;
 
+
   /* Make the masthead heading the same height as the navigation */
-  h3 {
+h3 {
     margin-top: 0;
     margin-bottom: 0;
     line-height: 40px;
@@ -48,9 +50,9 @@ body {
 
 .title {
   color: #00AA00;
-  font-family: 'Amaranth', sans-serif;
+  /*font-family: 'Amaranth', sans-serif;*/
   font-weight: 700;
-  font-size: 4em;
+  font-size: 1em;
 }
 
 .infoName {
@@ -87,6 +89,10 @@ body {
 ul {
   list-style: none;
   padding: 0%;
+}
+
+.menu {
+  z-index: 2;
 }
 
 
