@@ -1,9 +1,15 @@
 $icon-font-path: '../fonts/';
 
 // bower:scss
-/* @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";*/
-@import "_hamburgers.scss";
+@import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+@import "bower_components/font-awesome/scss/font-awesome.scss";
+@import "bower_components/css-hamburgers/_sass/hamburgers/hamburgers.scss";
 // endbower
+
+html, body, main {
+  height: 100%;
+  width: 100%;
+}
 
 .browserupgrade {
   margin: 0.2em 0;
@@ -12,112 +18,92 @@ $icon-font-path: '../fonts/';
   padding: 0.2em 0;
 }
 
-/* Space out content a bit */
-body {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  background-color: none;
+/*nav, main {
+  box-sizing: border-box;
+}*/
+
+.title {
+  font-size: 2.5em;
+  text-align: center;
+  color: lightgreen;
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
+nav {
+  width: 320px;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+  transform: translate(-270px, 0);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-wrap: nowrap;
 }
 
-/* Custom page header */
-.header {
-  border-bottom: 0px solid #e5e5e5;
+nav.open {
+  transform: translate(0, 0);
+}
 
+.list {
+  width: 270px;
+  border-radius: 25px;
+  opacity: .8;
+  background: black;
+  padding-left: 5px;
+  font-size: .5em;
+}
 
-  /* Make the masthead heading the same height as the navigation */
-h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 40px;
-    padding-bottom: 19px;
+.btn {
+  width: 50px;
+}
+
+@media screen and (max-width: 350px) {
+  .list {
+    width: 250px;
+  }
+  nav {
+    transform: translate(-250px, 0);
   }
 }
 
-/* Custom page footer */
-.footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
-}
+@media screen and (min-width: 800px) {
+  nav {
+    position: relative;
+    transform: translate(0, 0);
+    padding-left: 15px;
+  }
+  body {
+    display: flex;
+    flex-flow: row nowrap;
+  }
+  main {
+    flex-grow: 1;
+  }
+  .list {
+    width: 320px;
+  }
 
-.title {
-  color: #00AA00;
-  /*font-family: 'Amaranth', sans-serif;*/
-  font-weight: 700;
-  font-size: 1em;
+  .btn {
+    display: none;
+  }
 }
 
 .infoName {
   color: green;
 }
 
+.content {
+  max-width: 300px;
+}
+
 .map-canvas {
-  height: 100%;
-  width: 100%;
   position: absolute;
   z-index: 0;
   top: 0;
   left: 0;
 }
 
-.list-container {
-  position: absolute;
-  top: 1em;
-  left: 1em;
-  z-index: 1; /* The z-index should be higher than Google Maps */
-  width: 15em;
-  margin: auto auto 0;
-  padding: 10px;
-  background: black;
-  height: auto;
-  opacity: .8; /* Set the opacity for a slightly transparent Google Form */
-  color: green;
-}
-
-.content {
-  width: 200px;
-}
-
 ul {
   list-style: none;
   padding: 0%;
-}
-
-.menu {
-  z-index: 2;
-}
-
-
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
-
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
 }
 

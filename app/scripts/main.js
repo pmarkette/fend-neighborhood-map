@@ -226,6 +226,18 @@ var ViewModel = function(){
   self.drawMap();
   console.log(self.beerList());
 
+   /*
+   * Open the drawer when the hamburger is clicked.
+   */
+  var menu = document.querySelector('#menu');
+  var main = document.querySelector('main');
+  var drawer = document.querySelector('#drawer');
+
+  menu.addEventListener('click', function(e) {
+    drawer.classList.toggle('open');
+    menu.classList.toggle('is-active');
+    e.stopPropagation();
+  });
 };  //ViewModel
 
 function initialize(){
