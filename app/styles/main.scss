@@ -96,6 +96,13 @@ nav.open {
   }
 }
 
+@media screen and (min-height: 750px) {
+  nav {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+}
+
 .infoName {
   color: green;
 }
