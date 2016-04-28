@@ -11,6 +11,14 @@ html, body, main {
   width: 100%;
 }
 
+body {
+  display: flex;
+  flex-flow: row nowrap;
+}
+main {
+  flex-grow: 1;
+}
+
 .browserupgrade {
   margin: 0.2em 0;
   background: #ccc;
@@ -18,20 +26,16 @@ html, body, main {
   padding: 0.2em 0;
 }
 
-/*nav, main {
-  box-sizing: border-box;
-}*/
-
 .title {
-  font-size: 2.5em;
+  font-size: 4em;
   text-align: center;
-  color: lightgreen;
+  color: darkgreen;
 }
 
 nav {
   width: 320px;
-  height: 100%;
-  position: absolute;
+  height: auto;
+  position: relative;
   z-index: 1;
   transform: translate(-270px, 0);
   transition: transform 0.3s ease;
@@ -43,13 +47,25 @@ nav.open {
   transform: translate(0, 0);
 }
 
+.drawer {
+  display: flex;
+}
+
+.search {
+  width: 90%;
+  font-size: 2em;
+}
+
 .list {
   width: 270px;
-  border-radius: 25px;
+  border-radius: 10px;
+  border-color: green;
+  border-style: solid;
   opacity: .8;
-  background: black;
+  background: yellow;
   padding-left: 5px;
   font-size: .5em;
+  overflow-y: auto;
 }
 
 .btn {
@@ -67,17 +83,10 @@ nav.open {
 
 @media screen and (min-width: 800px) {
   nav {
-    position: relative;
     transform: translate(0, 0);
     padding-left: 15px;
   }
-  body {
-    display: flex;
-    flex-flow: row nowrap;
-  }
-  main {
-    flex-grow: 1;
-  }
+
   .list {
     width: 320px;
   }

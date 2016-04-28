@@ -30,7 +30,7 @@
     <nav id="drawer">
       <div class = "list">
           <h2 class="title">Oakland Breweries <br>and Beer Gardens</h2>
-          <input placeholder = "Type part of a name to filter..." data-bind="value: filter, valueUpdate: 'afterkeydown'">
+          <input class="search" placeholder = "Type a name to filter..." data-bind="value: filter, valueUpdate: 'afterkeydown'">
           <ul class = "nameplace" data-bind="foreach: filteredItems">
             <li><h3 class = "thename" data-bind ="text: name, click: $parent.selectBeer"></h3></li>
           </ul>
