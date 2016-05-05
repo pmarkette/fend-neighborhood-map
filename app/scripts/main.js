@@ -70,6 +70,7 @@ var ViewModel = function(){
     }
     };
     var map = new google.maps.Map(document.getElementsByClassName("map-canvas")[0], mapOptions);
+    var infowindow = new google.maps.InfoWindow("{content: ''}");
 
     for (var i = 0; i < self.beerList().length; i++) {
         //Yelp OAuth Example with Javascript: https://gist.github.com/kennygfunk/c24c8a2ea71c9ce7f4fc
@@ -134,7 +135,7 @@ var ViewModel = function(){
                 "<div>" + self.beerList()[i].address2() + "</div>" +
                 "<div>" + self.beerList()[i].displayPhone() + "</div>" +
                 "</div>";
-              var infowindow = new google.maps.InfoWindow({content: contentString});
+              infowindow.content = contentString;
 
               var currentLatLng = new google.maps.LatLng(self.beerList()[i].lat(), self.beerList()[i].lng());
               var marker = new google.maps.Marker({
@@ -151,6 +152,7 @@ var ViewModel = function(){
 
           google.maps.event.addListener(marker, "click", (function(marker, contentString, infoWindow){
                   return function(){
+                      infowindow.close();
                       infowindow.setContent(contentString);
                       infowindow.open(map, this);
                       self.currentLocation(this.title);
