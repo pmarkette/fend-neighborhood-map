@@ -11,7 +11,7 @@ var beers = [
   {name: "Lost & Found", lat: 37.8101575, lng: -122.2691598, phone: "+15107632040"},
   {name: "Woods Bar & Brewery", lat: 37.8070162, lng: -122.2705888, phone: "+15107618617"},
   {name: "Independent Brewing Co.", lat: 37.7964226, lng: -122.2712658, phone: "+15106982337"},
-  {name: "Ale Industries", lat: 37.7762289, lng: -122.2281795, phone: "+19254705280"}
+  {name: "Ale Industries", lat: 37.7762289, lng: -122.2281795, phone: "+15104793185"}
 ];
 
 var Location = function(data){
@@ -70,7 +70,10 @@ var ViewModel = function(){
     }
     };
     var map = new google.maps.Map(document.getElementsByClassName("map-canvas")[0], mapOptions);
-    var infowindow = new google.maps.InfoWindow("{content: ''}");
+    var infowindow = new google.maps.InfoWindow({
+      content: "",
+      maxWidth: 300
+    });
 
     for (var i = 0; i < self.beerList().length; i++) {
         //Yelp OAuth Example with Javascript: https://gist.github.com/kennygfunk/c24c8a2ea71c9ce7f4fc
@@ -214,8 +217,8 @@ var ViewModel = function(){
         self.markerReset();
         var selectedMarker;
         var nameClicked = $(event.target).text();
-        for (var i = 0; i < self.beerList().length; i++){
-            if (nameClicked === self.beerList()[i].name()) {
+        for (var i = 0; i < arrayOfMarkers.length; i++){
+            if (nameClicked === arrayOfMarkers[i].title) {
               selectedMarker = arrayOfMarkers[i];
               arrayOfMarkers[i].setIcon(selectedIcon);
               self.currentLocation(nameClicked);
@@ -226,8 +229,6 @@ var ViewModel = function(){
     };
 
   self.drawMap();
-  console.log(self.beerList());
-
    /*
    * Open the drawer when the hamburger is clicked.
    */

@@ -107,10 +107,6 @@ nav.open {
   color: green;
 }
 
-.content {
-  max-width: 300px;
-}
-
 .map-canvas {
   position: absolute;
   z-index: 0;
@@ -121,5 +117,9 @@ nav.open {
 ul {
   list-style: none;
   padding: 0%;
+}
+
+li {
+  cursor: pointer;
 }
 
