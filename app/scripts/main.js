@@ -115,6 +115,9 @@ var ViewModel = function(){
 
       //closure to apply yelp data to the observable array
       (function(i) {
+          var yelpRequestTimeout = setTimeout(function(){
+            alert("Failed to get data from Yelp");
+          }, 8000);
           $.ajax({
             "url": message.action,
             "data": parameterMap,
@@ -162,7 +165,8 @@ var ViewModel = function(){
                       marker.setIcon(selectedIcon);
                   };
               })(marker, contentString, infowindow));
-            }
+            clearTimeout(yelpRequestTimeout);
+            } //end success
           });
         })(i); //end closure
     } //end for loop
