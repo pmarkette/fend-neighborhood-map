@@ -176,8 +176,6 @@ var ViewModel = function(){
   self.markerReset = function(){
     for (var i = 0; i < arrayOfMarkers.length; i++){
       arrayOfMarkers[i].setIcon(unselectedIcon);
-
-      $("h3").css("color", unselectedColor);
     }
   };
 
@@ -220,7 +218,7 @@ var ViewModel = function(){
     self.selectBeer = function(data, event) {
         self.markerReset();
         var selectedMarker;
-        var nameClicked = $(event.target).text();
+        var nameClicked = data.name();
         for (var i = 0; i < arrayOfMarkers.length; i++){
             if (nameClicked === arrayOfMarkers[i].title) {
               selectedMarker = arrayOfMarkers[i];
@@ -228,7 +226,6 @@ var ViewModel = function(){
               self.currentLocation(nameClicked);
             }
         }
-        $(event.target).css("color", selectedColor);
         google.maps.event.trigger(selectedMarker, "click");
     };
 
@@ -237,7 +234,6 @@ var ViewModel = function(){
    * Open the drawer when the hamburger is clicked.
    */
   var menu = document.querySelector('#menu');
-  var main = document.querySelector('main');
   var drawer = document.querySelector('#drawer');
 
   menu.addEventListener('click', function(e) {
