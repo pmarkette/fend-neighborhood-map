@@ -5,9 +5,8 @@
     "bootstrap-sass": "~3.3.5",
     "knockout": "^3.4.0",
     "font-awesome": "fontawesome#^4.5.0",
-    "OAuth": "^1.0.7",
-    "sha1": "http://oauth.googlecode.com/svn/code/javascript/sha1.js",
-    "css-hamburgers": "^0.3.0"
+    "css-hamburgers": "^0.3.0",
+    "OAuth": "^1.0.7"
   },
   "overrides": {
     "bootstrap-sass": {
